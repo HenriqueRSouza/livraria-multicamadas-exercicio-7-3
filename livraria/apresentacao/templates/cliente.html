@@ -5,5 +5,6 @@
 <h3>Histórico de compras (pagamento simulado)</h3>{% for c in historico.compras %}<p>#{{ c.id }} · {{ c.titulo }} / {{ c.edicao }} · {{ c.loja }} · {{ c.preco_centavos|reais }}</p>{% else %}<p>Sem compras.</p>{% endfor %}
 <h3>Favoritos</h3>{% for b in favoritos %}<p><a href="{{ url_for('catalogo.livro',livro_id=b.id) }}">{{ b.titulo }}</a> <form method="post" action="{{ url_for('cliente.favorito',livro_id=b.id,acao='remover') }}"><button>Remover favorito</button></form></p>{% else %}<p>Nenhum favorito.</p>{% endfor %}
 <h3>Recomendações locais por interesse</h3>{% for b in recomendacoes %}<p><a href="{{ url_for('catalogo.livro',livro_id=b.id) }}">{{ b.titulo }}</a></p>{% else %}<p>Sem recomendações no catálogo de demonstração.</p>{% endfor %}
+<h3>Minhas avaliações</h3>{% for a in avaliacoes %}<p><a href="{{ url_for('catalogo.livro',livro_id=a.livro_id) }}">{{ a.titulo }}</a> · {{ a.nota }}/5{% if a.texto %} — {{ a.texto }}{% endif %}</p>{% else %}<p>Você ainda não avaliou livros.</p>{% endfor %}
 <h3>Notificações locais</h3>{% for n in notificacoes %}<p>{{ n.tipo }}: {{ n.mensagem }}</p>{% else %}<p>Nenhuma notificação.</p>{% endfor %}</section>
 {% endblock %}

@@ -20,5 +20,6 @@ class ServicoCatalogo(Servico):
                 edicoes.append(EdicaoDetalhada(ed.id, ed.nome, ed.ano, ed.preco_centavos,
                                                regras.preco_final(ed.preco_centavos, promocoes),
                                                promocoes, uow.lojas.estoques_da_edicao(ed.id)))
-            return DetalheLivro(livro.id, livro.titulo, livro.autor, livro.genero, livro.sinopse,
-                                uow.livros.avaliacoes(livro_id), edicoes)
+            avaliacoes = uow.livros.avaliacoes(livro_id)
+            return DetalheLivro(livro.id, livro.titulo, livro.autor, livro.genero, livro.sinopse, avaliacoes,
+                                edicoes, regras.media_avaliacoes(avaliacoes), len(avaliacoes))

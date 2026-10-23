@@ -1,7 +1,9 @@
 {% extends "base.html" %}{% block conteudo %}
 <article><h2>{{ livro.titulo }}</h2><p>{{ livro.autor }} · {{ livro.genero }}</p><p>{{ livro.sinopse }}</p>
 {% if cliente_atual %}<form method="post" action="{{ url_for('cliente.favorito',livro_id=livro.id,acao='adicionar') }}"><button>Salvar favorito</button></form>{% endif %}
-<h3>Avaliações de demonstração</h3>{% for a in livro.avaliacoes %}<p>{{ a.nota }}/5 — {{ a.texto }} ({{ a.autor }})</p>{% else %}<p>Ainda sem avaliações.</p>{% endfor %}
+<h3>Avaliações</h3>{% if livro.total_avaliacoes %}<p><strong>Média {{ '%.1f'|format(livro.media_avaliacoes)|replace('.', ',') }}/5</strong> · {{ livro.total_avaliacoes }} avaliação(ões)</p>{% endif %}
+{% for a in livro.avaliacoes %}<p>{{ a.nota }}/5{% if a.texto %} — {{ a.texto }}{% endif %} ({{ a.autor }}{% if not a.cliente_id %}, demonstração{% endif %})</p>{% else %}<p>Ainda sem avaliações.</p>{% endfor %}
+{% if cliente_atual %}<form method="post" action="{{ url_for('avaliacoes.avaliar',livro_id=livro.id) }}"><label>Sua nota <select name="nota">{% for n in range(5,0,-1) %}<option value="{{ n }}">{{ n }}</option>{% endfor %}</select></label><label>Comentário (opcional) <textarea name="texto" maxlength="500" rows="2" cols="40"></textarea></label><button>Enviar avaliação</button></form><p><small>Enviar de novo substitui sua avaliação anterior.</small></p>{% endif %}
 <h3>Compare as edições e a disponibilidade</h3>
 {% for ed in livro.edicoes %}<fieldset><legend>{{ ed.nome }} ({{ ed.ano }})</legend><p>Preço: {{ ed.preco_centavos|reais }} · Valor atual: {{ ed.preco_final_centavos|reais }}</p>
 {% for promo in ed.promocoes %}<p>Promoção de demonstração: {{ promo.descricao }} (−{{ promo.desconto_centavos|reais }})</p>{% endfor %}

@@ -24,7 +24,17 @@ class LivroRepositorio(_Repositorio):
         return _uma(Livro, self.db.execute("SELECT * FROM livros WHERE id=?", (livro_id,)).fetchone())
 
     def avaliacoes(self, livro_id):
-        return _todas(Avaliacao, self.db.execute("SELECT id, livro_id, nota, texto, autor FROM avaliacoes WHERE livro_id=? ORDER BY id", (livro_id,)))
+        return _todas(Avaliacao, self.db.execute("SELECT id, livro_id, nota, texto, autor, cliente_id FROM avaliacoes WHERE livro_id=? ORDER BY id", (livro_id,)))
+
+    def salvar_avaliacao(self, cliente, livro_id, nota, texto):
+        """Uma avaliação por cliente/livro: reenviar substitui nota e texto."""
+        self.db.execute("INSERT INTO avaliacoes(livro_id,cliente_id,nota,texto,autor) VALUES (?,?,?,?,?) "
+                        "ON CONFLICT(cliente_id,livro_id) DO UPDATE SET nota=excluded.nota, texto=excluded.texto, autor=excluded.autor",
+                        (livro_id, cliente.id, nota, texto, cliente.nome))
+        return _uma(Avaliacao, self.db.execute("SELECT id, livro_id, nota, texto, autor, cliente_id FROM avaliacoes WHERE cliente_id=? AND livro_id=?", (cliente.id, livro_id)).fetchone())
+
+    def avaliacoes_do_cliente(self, cliente_id):
+        return _todas(Avaliacao, self.db.execute("SELECT a.id, a.livro_id, a.nota, a.texto, a.autor, a.cliente_id, b.titulo FROM avaliacoes a JOIN livros b ON b.id=a.livro_id WHERE a.cliente_id=? ORDER BY a.id DESC", (cliente_id,)))
 
 
 class EdicaoRepositorio(_Repositorio):

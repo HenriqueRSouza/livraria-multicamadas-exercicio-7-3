@@ -51,6 +51,28 @@ def pontos_fidelidade(compras):
     return sum(c.preco_centavos // 100 for c in compras)
 
 
+TEXTO_AVALIACAO_MAX = 500
+
+
+def validar_avaliacao(nota, texto=""):
+    """R07: nota inteira 1..5 e texto opcional de até 500 caracteres."""
+    try:
+        nota = int(nota)
+    except (TypeError, ValueError):
+        raise RegraInvalida("A nota deve ser um número inteiro de 1 a 5.") from None
+    texto = (texto or "").strip()
+    if not 1 <= nota <= 5:
+        raise RegraInvalida("A nota deve ser um número inteiro de 1 a 5.")
+    if len(texto) > TEXTO_AVALIACAO_MAX:
+        raise RegraInvalida(f"O texto da avaliação aceita até {TEXTO_AVALIACAO_MAX} caracteres.")
+    return nota, texto
+
+
+def media_avaliacoes(avaliacoes):
+    """R07: média com uma casa decimal (None sem avaliações)."""
+    return round(sum(a.nota for a in avaliacoes) / len(avaliacoes), 1) if avaliacoes else None
+
+
 def exigir_esgotado(estoque):
     """R06: alerta só para edição esgotada na unidade."""
     if not estoque or estoque.quantidade != 0:

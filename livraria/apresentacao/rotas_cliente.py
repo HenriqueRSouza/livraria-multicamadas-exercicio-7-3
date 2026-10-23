@@ -12,7 +12,8 @@ def area():
     s, atual = servicos(), cliente_id()
     return render_template("cliente.html", historico=s.pedidos.historico(atual),
                            favoritos=s.clientes.favoritos(atual), recomendacoes=s.clientes.recomendacoes(atual),
-                           notificacoes=s.comunicacao.notificacoes(atual))
+                           notificacoes=s.comunicacao.notificacoes(atual),
+                           avaliacoes=s.avaliacoes.avaliacoes_do_cliente(atual))
 
 
 @bp.post("/cadastro")

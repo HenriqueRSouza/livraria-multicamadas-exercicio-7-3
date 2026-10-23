@@ -4,7 +4,8 @@ import os
 from flask import Flask, flash, redirect, request, session, url_for
 
 from livraria.aplicacao import RegraInvalida, criar_servicos
-from livraria.apresentacao import rotas_catalogo, rotas_cliente, rotas_comunicacao, rotas_pedidos
+from livraria.apresentacao import (rotas_avaliacoes, rotas_catalogo, rotas_cliente, rotas_comunicacao,
+                                   rotas_pedidos)
 from livraria.apresentacao.suporte import EXTENSAO, servicos
 
 
@@ -13,7 +14,7 @@ def create_app(db_path=None):
     app.secret_key = os.environ.get("LIVRARIA_SECRET", "chave-local-apenas-demonstracao")
     app.extensions[EXTENSAO] = criar_servicos(db_path or os.environ.get("LIVRARIA_DB", "livraria.db"))
 
-    for modulo in (rotas_catalogo, rotas_cliente, rotas_pedidos, rotas_comunicacao):
+    for modulo in (rotas_catalogo, rotas_cliente, rotas_pedidos, rotas_comunicacao, rotas_avaliacoes):
         app.register_blueprint(modulo.bp)
 
     @app.template_filter("reais")

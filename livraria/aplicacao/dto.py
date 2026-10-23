@@ -1,6 +1,6 @@
 """Modelos de leitura montados pela aplicação para a apresentação."""
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Optional
 
 from livraria.dominio.entidades import Avaliacao, Compra, Estoque, Promocao, Reserva
 
@@ -25,6 +25,8 @@ class DetalheLivro:
     sinopse: str
     avaliacoes: List[Avaliacao]
     edicoes: List[EdicaoDetalhada]
+    media_avaliacoes: Optional[float] = None
+    total_avaliacoes: int = 0
 
 
 @dataclass

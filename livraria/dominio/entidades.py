@@ -63,6 +63,8 @@ class Avaliacao:
     nota: int
     texto: str
     autor: str
+    cliente_id: Optional[int] = None
+    titulo: str = ""
 
 
 @dataclass

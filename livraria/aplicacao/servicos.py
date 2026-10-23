@@ -1,6 +1,7 @@
 """Composição dos serviços sobre um banco SQLite."""
 from dataclasses import dataclass
 
+from livraria.aplicacao.avaliacoes import ServicoAvaliacoes
 from livraria.aplicacao.catalogo import ServicoCatalogo
 from livraria.aplicacao.clientes import ServicoClientes
 from livraria.aplicacao.comunicacao import ServicoComunicacao
@@ -16,6 +17,7 @@ class Servicos:
     clientes: ServicoClientes
     pedidos: ServicoPedidos
     comunicacao: ServicoComunicacao
+    avaliacoes: ServicoAvaliacoes
 
 
 def criar_servicos(caminho_banco):
@@ -23,4 +25,4 @@ def criar_servicos(caminho_banco):
     banco = BancoSQLite(caminho_banco)
     banco.inicializar()
     return Servicos(ServicoCatalogo(banco), ServicoLojas(banco), ServicoClientes(banco),
-                    ServicoPedidos(banco), ServicoComunicacao(banco))
+                    ServicoPedidos(banco), ServicoComunicacao(banco), ServicoAvaliacoes(banco))

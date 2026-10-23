@@ -42,6 +42,20 @@ class FluxoHTTPTest(unittest.TestCase):
         resposta = self.web.post("/comprar", data={"edicao_id": 2, "loja_id": 1}, follow_redirects=True)
         self.assertIn("Sem estoque", resposta.text)
 
+    def test_c09_avaliar_livro_pela_interface(self):
+        self.assertNotIn("Enviar avaliação", self.web.get("/livro/1").text)
+        self.web.post("/livro/1/avaliar", data={"nota": "4"})
+        self.assertEqual(self.web.get("/livro/1").status_code, 200)
+        self.web.post("/cadastro", data={"nome": "Ana", "email": "ana@example.com", "bairro": "Centro", "interesses": "Ficção"})
+        self.assertIn("Média 5,0/5", self.web.get("/livro/1").text)
+        resposta = self.web.post("/livro/1/avaliar", data={"nota": "4", "texto": "Gostei"}, follow_redirects=True)
+        self.assertIn("Avaliação registrada: 4/5", resposta.text)
+        self.assertIn("Média 4,5/5", resposta.text)
+        self.assertIn("2 avaliação(ões)", resposta.text)
+        self.assertIn("A Casa das Marés</a> · 4/5 — Gostei", self.web.get("/cliente").text)
+        resposta = self.web.post("/livro/1/avaliar", data={"nota": "9"}, headers={"Referer": "/livro/1"}, follow_redirects=True)
+        self.assertIn("nota deve ser", resposta.text)
+
 
 if __name__ == "__main__":
     unittest.main()
