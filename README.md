@@ -14,7 +14,6 @@ O cliente logado dá uma nota de 1 a 5 (com comentário opcional, até 500 carac
 
 ## Arquitetura
 
-![Arquitetura multicamadas](docs/arquitetura.png)
 
 ```
 app.py                 cria o app Flask e registra as rotas
