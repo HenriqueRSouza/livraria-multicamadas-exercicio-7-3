@@ -11,3 +11,10 @@ Marcar somente após verificar a tarefa. IDs de aceitação referem-se à especi
 - [x] T07 Implementar alertas e reposição simulada; passar testes (C07).
 - [x] T08 Construir rotas Flask e interface navegável; verificar fluxos HTTP (C08). Testes HTTP e servidor HTTP 200.
 - [x] T09 Documentar execução e limitações, testar tudo e percorrer fluxos; verificar commits (C01–C08). 10 testes passaram; servidor Flask respondeu HTTP 200.
+
+## Exercício 7.3 — Arquitetura multicamadas
+
+- [ ] T10 Especificar avaliações de clientes (R07, C09).
+- [ ] T11 Refatorar para quatro camadas (apresentação, aplicação, domínio, dados) preservando C01–C08.
+- [ ] T12 Implementar avaliações de clientes em todas as camadas (C09).
+- [ ] T13 Testar regras de domínio, serviços, HTTP e dependências entre camadas; documentar arquitetura.
