@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block conteudo %}
+<section><h2>Encontrar lojas por bairro (sem GPS)</h2><form method="get"><label>Bairro <input name="bairro" value="{{ request.args.get('bairro','') }}"></label><button>Filtrar</button></form>
+{% for l in lojas %}<div class="card"><h3>{{ l.nome }} · {{ l.bairro }}</h3><p>{{ l.endereco }} · {{ l.horario }}</p><p>Pagamentos simulados: {{ l.pagamentos }} · Serviços: {{ l.servicos }} · Café: {{ 'Sim' if l.cafe else 'Não' }}</p><p>Eventos de demonstração: {{ l.eventos }}</p></div>{% else %}<p>Nenhuma unidade encontrada.</p>{% endfor %}</section>
+{% endblock %}

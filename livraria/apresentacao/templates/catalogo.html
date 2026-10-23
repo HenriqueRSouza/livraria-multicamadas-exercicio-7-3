@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block conteudo %}
+<section><h2>Catálogo</h2><form method="get"><label>Título <input name="titulo" value="{{ request.args.get('titulo','') }}"></label><label>Autor <input name="autor" value="{{ request.args.get('autor','') }}"></label><label>Gênero <input name="genero" value="{{ request.args.get('genero','') }}"></label><button>Pesquisar</button></form>
+{% for b in livros %}<div class="card"><h3><a href="{{ url_for('catalogo.livro',livro_id=b.id) }}">{{ b.titulo }}</a></h3><p>{{ b.autor }} · {{ b.genero }}</p></div>{% else %}<p>Nenhum livro encontrado.</p>{% endfor %}</section>
+{% endblock %}

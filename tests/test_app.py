@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from app import create_app
+from livraria.apresentacao import create_app
 
 
 class FluxoHTTPTest(unittest.TestCase):

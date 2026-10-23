@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block conteudo %}
+<section><h2>Cadastro simples de demonstração</h2><p>Sem senha ou autenticação de produção.</p><form method="post" action="{{ url_for('cliente.cadastro') }}"><label>Nome <input name="nome" required></label><label>Email <input name="email" type="email" required></label><label>Bairro <input name="bairro" required></label><label>Interesses (gêneros separados por vírgula) <input name="interesses"></label><button>Cadastrar</button></form>
+<h3>Já cadastrou?</h3><form method="post" action="{{ url_for('cliente.entrar') }}"><label>Email <input name="email" type="email" required></label><button>Entrar</button></form></section>
+{% endblock %}
