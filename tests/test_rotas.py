@@ -1,9 +1,9 @@
-"""C08: navegação HTTP real pela interface da demonstração."""
+"""C08 e C09 via HTTP: testa as rotas (apresentação) passando por todas as camadas."""
 import tempfile
 import unittest
 from pathlib import Path
 
-from livraria.apresentacao import create_app
+from app import create_app
 
 
 class FluxoHTTPTest(unittest.TestCase):

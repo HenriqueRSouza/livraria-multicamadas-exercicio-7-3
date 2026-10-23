@@ -15,6 +15,6 @@ Marcar somente após verificar a tarefa. IDs de aceitação referem-se à especi
 ## Exercício 7.3 — Arquitetura multicamadas
 
 - [x] T10 Especificar avaliações de clientes (R07, C09).
-- [x] T11 Refatorar para quatro camadas (apresentação, aplicação, domínio, dados) preservando C01–C08. 10 testes C01–C08 passaram após a refatoração.
-- [x] T12 Implementar avaliações de clientes em todas as camadas (C09). 4 novos testes (serviço e HTTP) passaram.
-- [x] T13 Testar regras de domínio, serviços, HTTP e dependências entre camadas; documentar arquitetura. 22 testes passaram; servidor respondeu HTTP 200.
+- [x] T11 Refatorar para quatro camadas nas pastas routes (apresentação), controllers (aplicação), models (negócio) e db (dados) preservando C01–C08.
+- [x] T12 Implementar avaliações de clientes em todas as camadas (C09). Testes de controller e HTTP passaram.
+- [x] T13 Testar controllers (C01–C07, C09) e rotas HTTP (C08, C09); documentar arquitetura. 12 testes passaram; servidor respondeu HTTP 200.
